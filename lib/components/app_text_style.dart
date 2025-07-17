@@ -25,6 +25,7 @@ class AppTextStyle {
     fontSize: 17,
     fontWeight: FontWeight.w400,
     color: AppColorsPath.darkBlue,
+
   );
   static final text57darkBlueBold = TextStyle(
     fontFamily: 'Inter',

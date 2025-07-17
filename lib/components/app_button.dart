@@ -28,7 +28,7 @@ class AppButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 27),
         alignment: Alignment.center,
         child: Text(
-          "Get Started",
+          content,
           style:
               isWhite
                   ? AppTextStyle.text17darkBlueMedium
