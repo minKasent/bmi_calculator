@@ -7,14 +7,19 @@ import 'package:bmi_calculator/screens/bmi_result_screen.dart';
 import 'package:bmi_calculator/screens/widgets/age_weight_info_widget.dart';
 import 'package:flutter/material.dart';
 
-class BmiCalculatorScreen extends StatelessWidget {
+class BmiCalculatorScreen extends StatefulWidget {
   const BmiCalculatorScreen({super.key});
 
   @override
+  State<BmiCalculatorScreen> createState() => _BmiCalculatorScreenState();
+}
+
+class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
+  int age = 30;
+  int weight = 70;
+  int height = 175;
+  @override
   Widget build(BuildContext context) {
-    int age = 30;
-    int weight = 70;
-    int height = 175;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColorsPath.lightWhite,
@@ -33,18 +38,30 @@ class BmiCalculatorScreen extends StatelessWidget {
                 AgeWeightInfoWidget(
                   isAgeComponent: true,
                   onMinusTap: () {
-                    //  age --;
+                    setState(() {
+                      age--;
+                    });
                   },
                   onPlusTap: () {
-                    // age ++ ;
+                    setState(() {
+                      age++;
+                    });
                   },
                   number: age,
                 ),
                 SizedBox(width: 21),
                 AgeWeightInfoWidget(
                   isAgeComponent: false,
-                  onMinusTap: () {},
-                  onPlusTap: () {},
+                  onMinusTap: () {
+                    setState(() {
+                      weight--;
+                    });
+                  },
+                  onPlusTap: () {
+                    setState(() {
+                      weight++;
+                    });
+                  },
                   number: weight,
                 ),
               ],
@@ -55,7 +72,6 @@ class BmiCalculatorScreen extends StatelessWidget {
                 color: AppColorsPath.white,
                 borderRadius: BorderRadius.circular(12),
               ),
-              height: 183 / 852 * size.height,
               width: size.width - 30 * 2,
               padding: const EdgeInsets.fromLTRB(28, 18, 30, 25),
               child: Column(
@@ -69,7 +85,38 @@ class BmiCalculatorScreen extends StatelessWidget {
                     content: height.toString(),
                     style: AppTextStyle.text57darkBlueBold,
                   ),
-                  //Slider(value: height, onChanged: (value) min : 50 , max : 300)
+                  Slider(
+                    padding: EdgeInsets.zero,
+                    value: height.toDouble(),
+                    inactiveColor: Color(0xFFCCCCCC),
+                    activeColor: Color(0xFFCCCCCC),
+                    thumbColor: AppColorsPath.purple,
+                    min: 50,
+                    max: 300,
+                    onChanged: (value) {
+                      value;
+                      setState(() {
+                        height = value.toInt();
+                      });
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AppText(
+                        content: "50 cm",
+                        style: AppTextStyle.text17darkBlueRegular.copyWith(
+                          fontSize: 13,
+                        ),
+                      ),
+                      AppText(
+                        content: "300 cm",
+                        style: AppTextStyle.text17darkBlueRegular.copyWith(
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -90,6 +137,39 @@ class BmiCalculatorScreen extends StatelessWidget {
                     style: AppTextStyle.text17darkBlueRegular,
                   ),
                   SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppText(content: "Male",style: AppTextStyle.text17darkBlueRegular),
+                      SizedBox(width: 10,),
+                      Container(
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(63),
+                         color: AppColorsPath.lightWhite,
+                       ),
+                        width: 135,
+                        height: 41,
+                        padding: EdgeInsets.fromLTRB(3, 3, 3, 0),
+                        child: Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: AppColorsPath.purple,
+                                borderRadius: BorderRadius.circular(63),
+                              ),
+                              width: 35,
+                              height: 35,
+                            ),
+                          ],
+                        ),
+
+                      ),
+                      SizedBox(width: 10,),
+                      
+
+                      AppText(content: "FeMale",style: AppTextStyle.text17darkBlueRegular),
+                    ],
+                  ),
                 ],
               ),
             ),
