@@ -5,8 +5,12 @@ import 'package:bmi_calculator/constants/app_colors_path.dart';
 import 'package:bmi_calculator/constants/app_icons_path.dart';
 import 'package:bmi_calculator/screens/bmi_result_screen.dart';
 import 'package:bmi_calculator/screens/widgets/age_weight_info_widget.dart';
+import 'package:bmi_calculator/screens/widgets/gender_info_widget.dart';
+import 'package:bmi_calculator/screens/widgets/gender_switch.dart';
 import 'package:flutter/material.dart';
-
+ValueNotifier <int> age = ValueNotifier<int>(30);
+ValueNotifier <int> weight = ValueNotifier<int>(70);
+ValueNotifier <int> height = ValueNotifier<int>(175);
 class BmiCalculatorScreen extends StatefulWidget {
   const BmiCalculatorScreen({super.key});
 
@@ -15,9 +19,11 @@ class BmiCalculatorScreen extends StatefulWidget {
 }
 
 class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
-  int age = 30;
-  int weight = 70;
-  int height = 175;
+  // int age = 30;
+  // int weight = 70;
+  // int height = 175;
+  // bool isFemale = false;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -35,35 +41,31 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
             SizedBox(height: 39),
             Row(
               children: [
-                AgeWeightInfoWidget(
-                  isAgeComponent: true,
-                  onMinusTap: () {
-                    setState(() {
-                      age--;
-                    });
-                  },
-                  onPlusTap: () {
-                    setState(() {
-                      age++;
-                    });
-                  },
-                  number: age,
-                ),
+                ValueListenableBuilder(valueListenable: age, builder: (context , value , child) {
+                  return AgeWeightInfoWidget(
+                    isAgeComponent: true,
+                    onMinusTap: () {
+                        age.value--;
+                    },
+                    onPlusTap: () {
+                      age.value++;
+                    },
+                    number: age.value,
+                  );
+                }),
                 SizedBox(width: 21),
-                AgeWeightInfoWidget(
-                  isAgeComponent: false,
-                  onMinusTap: () {
-                    setState(() {
-                      weight--;
-                    });
-                  },
-                  onPlusTap: () {
-                    setState(() {
-                      weight++;
-                    });
-                  },
-                  number: weight,
-                ),
+                ValueListenableBuilder(valueListenable: weight, builder: (context , value , child) {
+                  return AgeWeightInfoWidget(
+                    isAgeComponent: false,
+                    onMinusTap: () {
+                      value--;
+                    },
+                    onPlusTap: () {
+                      value++;
+                    },
+                    number: weight.value,
+                  );
+                }),
               ],
             ),
             SizedBox(height: 23),
@@ -85,21 +87,21 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                     content: height.toString(),
                     style: AppTextStyle.text57darkBlueBold,
                   ),
-                  Slider(
-                    padding: EdgeInsets.zero,
-                    value: height.toDouble(),
-                    inactiveColor: Color(0xFFCCCCCC),
-                    activeColor: Color(0xFFCCCCCC),
-                    thumbColor: AppColorsPath.purple,
-                    min: 50,
-                    max: 300,
-                    onChanged: (value) {
-                      value;
-                      setState(() {
-                        height = value.toInt();
-                      });
-                    },
-                  ),
+                  // Slider(
+                  //   padding: EdgeInsets.zero,
+                  //   value: height.toDouble(),
+                  //   inactiveColor: Color(0xFFCCCCCC),
+                  //   activeColor: Color(0xFFCCCCCC),
+                  //   thumbColor: AppColorsPath.purple,
+                  //   min: 50,
+                  //   max: 300,
+                  //   onChanged: (value) {
+                  //     value;
+                  //     setState(() {
+                  //       height = value.toInt();
+                  //     });
+                  //   },
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -137,46 +139,21 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                     style: AppTextStyle.text17darkBlueRegular,
                   ),
                   SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppText(content: "Male",style: AppTextStyle.text17darkBlueRegular),
-                      SizedBox(width: 10,),
-                      Container(
-                       decoration: BoxDecoration(
-                         borderRadius: BorderRadius.circular(63),
-                         color: AppColorsPath.lightWhite,
-                       ),
-                        width: 135,
-                        height: 41,
-                        padding: EdgeInsets.fromLTRB(3, 3, 3, 0),
-                        child: Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: AppColorsPath.purple,
-                                borderRadius: BorderRadius.circular(63),
-                              ),
-                              width: 35,
-                              height: 35,
-                            ),
-                          ],
-                        ),
-
-                      ),
-                      SizedBox(width: 10,),
-                      
-
-                      AppText(content: "FeMale",style: AppTextStyle.text17darkBlueRegular),
-                    ],
-                  ),
+                  // GenderSwitch(
+                  //   isFemale: isFemale,
+                  //   onChanged: (value) {
+                  //     setState(() {
+                  //       isFemale = value;
+                  //     });
+                  //   },
+                  // ),
                 ],
               ),
             ),
             SizedBox(height: 31),
             AppButton(
               onTap: () {
-                final bmi = weight / ((height / 100) * (height / 100));
+                // final bmi = weight / ((height / 100) * (height / 100));
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => BmiResultScreen()),

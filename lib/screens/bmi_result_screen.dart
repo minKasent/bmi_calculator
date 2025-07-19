@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../components/app_button.dart';
 import '../components/app_text_style.dart';
+import 'bmi_calculator_screen.dart';
 
 class BmiResultScreen extends StatelessWidget {
   const BmiResultScreen({super.key});
@@ -23,10 +24,15 @@ class BmiResultScreen extends StatelessWidget {
               style: AppTextStyle.text17darkBlueRegular,
             ),
             SizedBox(height: 67 / 852 * size.height),
-            AppText(
-              content: "Body Mass Index",
-              style: AppTextStyle.text17darkBlueRegular.copyWith(fontSize: 27),
-            ),
+            ValueListenableBuilder(valueListenable: age, builder: (context,value ,child){
+              return  AppText(
+                content: "Body Mass Index $value",
+                style: AppTextStyle.text17darkBlueRegular.copyWith(fontSize: 27),
+              );
+
+
+            }),
+
             SizedBox(height: 42 / 852 * size.height),
             Container(
               height: 416 / 852 * size.height,
