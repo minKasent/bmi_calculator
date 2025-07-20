@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 ValueNotifier <int> age = ValueNotifier<int>(30);
 ValueNotifier <int> weight = ValueNotifier<int>(70);
 ValueNotifier <int> height = ValueNotifier<int>(175);
+ValueNotifier <double> bmiResult = ValueNotifier<double>(0.0);
 class BmiCalculatorScreen extends StatefulWidget {
   const BmiCalculatorScreen({super.key});
 
@@ -153,7 +154,8 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
             SizedBox(height: 31),
             AppButton(
               onTap: () {
-                // final bmi = weight / ((height / 100) * (height / 100));
+                // ValueListenableBuilder(valueListenable: valueListenable, builder: builder)
+                // final value.bmiResult = value.weight / ((value.height / 100) * (value.height / 100));
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => BmiResultScreen()),
