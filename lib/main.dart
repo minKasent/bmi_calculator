@@ -58,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
           // children horizontally, and tries to be as tall as its parent.
           //
           // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
           //
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
