@@ -18,7 +18,6 @@ class BmiCalculatorScreen extends StatefulWidget {
 
 class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
   // int age = 30;
-  // int weight = 70;
 
   @override
   Widget build(BuildContext context) {
